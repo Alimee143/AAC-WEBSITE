@@ -38,54 +38,6 @@ window.addEventListener('DOMContentLoaded', () => {
   animate();
 });
 
-// --- Faded Circle Follower ---
-(function() {
-  // Create the faded circle element
-  const fadedCircle = document.createElement('div');
-  fadedCircle.style.position = 'fixed';
-  fadedCircle.style.pointerEvents = 'none';
-  fadedCircle.style.width = '50px';
-  fadedCircle.style.height = '50px';
-  fadedCircle.style.borderRadius = '50%';
-  fadedCircle.style.background = 'transparent'; // No fill
-  fadedCircle.style.border = '3px solid #041E42'; // Navy blue border
-  fadedCircle.style.boxSizing = 'border-box';
-  fadedCircle.style.zIndex = '9999';
-  fadedCircle.style.transition = 'opacity 0.2s';
-  fadedCircle.style.opacity = '0.7';
-  fadedCircle.style.left = '0px';
-  fadedCircle.style.top = '0px';
-  document.body.appendChild(fadedCircle);
-
-  // Smooth follow variables
-  let targetX = 0, targetY = 0;
-  let currentX = 0, currentY = 0;
-
-  // Track mouse and update target position
-  document.addEventListener('mousemove', (e) => {
-    targetX = e.clientX - 25;
-    targetY = e.clientY - 25;
-    fadedCircle.style.opacity = '0.7';
-  });
-
-  // Animation loop for smooth movement
-  function followMouse() {
-    currentX += (targetX - currentX) * 0.18;
-    currentY += (targetY - currentY) * 0.18;
-    fadedCircle.style.left = currentX + 'px';
-    fadedCircle.style.top = currentY + 'px';
-    requestAnimationFrame(followMouse);
-  }
-  followMouse();
-
-  // Fade out when mouse leaves window
-  document.addEventListener('mouseleave', () => {
-    fadedCircle.style.opacity = '0';
-  });
-  document.addEventListener('mouseenter', () => {
-    fadedCircle.style.opacity = '0.7';
-  });
-})();
 // Hamburger menu toggle
 document.addEventListener('DOMContentLoaded', function() {
   const menuToggle = document.getElementById('menu-toggle');
@@ -103,12 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
- window.addEventListener('scroll', function() {
-      const navButtons = document.querySelector('.nav-buttons');
-      if (window.scrollY > 50) {
-        navButtons.classList.add('scrolled');
-      } else {
-        navButtons.classList.remove('scrolled');
-      };
-    }
-  ); 
+window.addEventListener('scroll', function() {
+  const navButtons = document.querySelector('.nav-buttons');
+  if (window.scrollY > 50) {
+    navButtons.classList.add('scrolled');
+  } else {
+    navButtons.classList.remove('scrolled');
+  }
+});

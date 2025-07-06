@@ -84,7 +84,7 @@ section.container.text-center.py-5 {
   background: transparent;
   border-radius: 0;
   z-index: 1000;
-  transition: background 2s cubic-bezier(.4,0,.2,1), box-shadow 2s cubic-bezier(.4,0,.2,1), position 0.3s;
+  transition: background 1.2s cubic-bezier(.4,0,.2,1), box-shadow 1.2s cubic-bezier(.4,0,.2,1);
 }
 
 /* Make nav-buttons sticky when scrolled */
@@ -191,5 +191,26 @@ section, .container, .py-5 {
     z-index: 1500;
     width: 160px;
   }
+}
+
+/* Add top margin to main containers on all pages except the home page */
+body:not(.home-page) .container,
+body:not(.home-page) .container-fluid,
+body:not(.home-page) section.container {
+  margin-top: 40px !important;
+}
+
+/* Add spacing below the nav bar for all direct children inside main containers except the home page */
+body:not(.home-page) .container > *,
+body:not(.home-page) .container-fluid > *,
+body:not(.home-page) section.container > * {
+  margin-top: 20px;
+}
+
+/* Remove extra margin from the first child if needed */
+body:not(.home-page) .container > :first-child,
+body:not(.home-page) .container-fluid > :first-child,
+body:not(.home-page) section.container > :first-child {
+  margin-top: 0;
 }
 
