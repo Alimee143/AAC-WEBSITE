@@ -1,0 +1,15 @@
+{
+  "name": "aac-threejs-integration",
+  "version": "1.0.0",
+  "description": "A project integrating three.js for 3D elements in the AAC Georgetown University website.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "live-server src",
+    "build": "echo 'Build script not defined'"
+  },
+  "dependencies": {
+    "three": "^0.152.0"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
