@@ -125,3 +125,13 @@ section.container.text-center.py-5 {
 section, .container, .py-5 {
   scroll-snap-align: start;
 }
+
+.card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 32px rgba(4,30,66,0.18);
+  transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+.card {
+  transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s cubic-bezier(.4,0,.2,1);
+}
