@@ -102,3 +102,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+ window.addEventListener('scroll', function() {
+      const navButtons = document.querySelector('.nav-buttons');
+      if (window.scrollY > 50) {
+        navButtons.classList.add('scrolled');
+      } else {
+        navButtons.classList.remove('scrolled');
+      }
