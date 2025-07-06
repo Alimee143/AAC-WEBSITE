@@ -15,21 +15,14 @@ body {
 .hero {
   background: url('1.png') no-repeat center center/cover;
   height: 100vh;
+  min-height: 350px;
   width: 100vw;
-  min-height: 100vh;
-  color: #9EA2A2; /* Georgetown Gray */
-  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   position: relative;
-  overflow: hidden;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
-  transition: transform 0.8s cubic-bezier(.77,0,.18,1);
-  will-change: transform;
 }
 
 /* Slide up effect on scroll */
@@ -134,4 +127,73 @@ section, .container, .py-5 {
 
 .card {
   transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+/* Responsive Hero Image */
+@media (max-width: 768px) {
+  .hero {
+    height: 50vh;
+    min-height: 200px;
+    background-size: cover;
+  }
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+}
+
+/* Hamburger menu styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  z-index: 1100;
+  margin-left: 10px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  height: 4px;
+  width: 28px;
+  background: #041E42;
+  margin: 4px 0;
+  border-radius: 2px;
+  display: block;
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .nav-buttons {
+    display: none;
+  }
+  .nav-buttons.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    right: 10px;
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(4,30,66,0.12);
+    border-radius: 8px;
+    padding: 10px 0;
+    z-index: 1100;
+    width: 160px;
+  }
+  .nav-buttons.active a {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+  }
+  .hamburger {
+    display: flex;
+    position: absolute;
+    top: 16px;
+    right: 20px;
+  }
 }
