@@ -109,4 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
         navButtons.classList.add('scrolled');
       } else {
         navButtons.classList.remove('scrolled');
-      }
+      };
+    }
+  ); 
