@@ -1,7 +1,7 @@
-const blogs = [
+const Events = [
   {
-    id: "blog1",
-    title: "Welcome to the Blogs",
+    id: "Event1",
+    title: "Welcome to the Events",
     date: "June 22, 2025",
     author: "AAC Board",
     authorImg: "https://randomuser.me/api/portraits/men/32.jpg",
@@ -11,7 +11,7 @@ const blogs = [
     tags: ["Club News", "Events"]
   },
   {
-    id: "blog2",
+    id: "Event2",
     title: "Spring Welcome Event Recap",
     date: "June 10, 2025",
     author: "AAC Events",
@@ -22,7 +22,7 @@ const blogs = [
     tags: ["Events"]
   },
   {
-    id: "blog3",
+    id: "Event3",
     title: "AAC at Georgetown Day",
     date: "May 28, 2025",
     author: "AAC Team",
@@ -33,7 +33,7 @@ const blogs = [
     tags: ["Events"]
   },
   {
-    id: "blog4",
+    id: "Event4",
     title: "Meet the New Board",
     date: "May 15, 2025",
     author: "AAC Board",
@@ -45,25 +45,25 @@ const blogs = [
   }
 ];
 
-// Render blog list
-function renderBlogList(excludeId) {
-  const blogList = document.getElementById('blog-list');
-  blogList.innerHTML = '';
-  blogs
-    .filter(blog => blog.id !== excludeId)
+// Render Event list
+function renderEventList(excludeId) {
+  const EventList = document.getElementById('Event-list');
+  EventList.innerHTML = '';
+  Events
+    .filter(Event => Event.id !== excludeId)
     .slice(0, 3)
-    .forEach(blog => {
-      blogList.innerHTML += `
+    .forEach(Event => {
+      EventList.innerHTML += `
         <div class="col-md-4 mb-4">
-          <a href="#${blog.id}" style="text-decoration:none;color:inherit;">
+          <a href="#${Event.id}" style="text-decoration:none;color:inherit;">
             <div class="card border-0 shadow-sm h-100">
-              <img src="${blog.image}" class="card-img-top" alt="${blog.title}">
+              <img src="${Event.image}" class="card-img-top" alt="${Event.title}">
               <div class="card-body">
-                <h5 class="card-title mb-1">${blog.title}</h5>
-                <p class="card-text text-muted small">${blog.summary}</p>
+                <h5 class="card-title mb-1">${Event.title}</h5>
+                <p class="card-text text-muted small">${Event.summary}</p>
                 <div>
-                  <img src="${blog.authorImg}" alt="Author" style="width:24px;height:24px;border-radius:50%;margin-right:6px;">
-                  <small class="text-muted">${blog.author} &middot; ${blog.date}</small>
+                  <img src="${Event.authorImg}" alt="Author" style="width:24px;height:24px;border-radius:50%;margin-right:6px;">
+                  <small class="text-muted">${Event.author} &middot; ${Event.date}</small>
                 </div>
               </div>
             </div>
@@ -73,44 +73,44 @@ function renderBlogList(excludeId) {
     });
 }
 
-// Render single blog
-function renderBlog(blog) {
-  const blogContent = document.getElementById('blog-content');
-  blogContent.innerHTML = `
+// Render single Event
+function renderEvent(Event) {
+  const EventContent = document.getElementById('Event-content');
+  EventContent.innerHTML = `
     <div class="card border-0 shadow-sm mb-4">
-      <img src="${blog.image}" class="card-img-top img-fluid rounded-0" alt="${blog.title}">
+      <img src="${Event.image}" class="card-img-top img-fluid rounded-0" alt="${Event.title}">
       <div class="card-body">
-        <h2 class="card-title mb-2">${blog.title}</h2>
+        <h2 class="card-title mb-2">${Event.title}</h2>
         <div class="mb-3 text-muted small">
-          <span class="mr-3"><i class="far fa-calendar-alt"></i> ${blog.date}</span>
-          <span class="mr-3"><i class="far fa-folder"></i> ${blog.tags.map(tag => `<span class="badge badge-primary">${tag}</span>`).join(' ')}</span>
+          <span class="mr-3"><i class="far fa-calendar-alt"></i> ${Event.date}</span>
+          <span class="mr-3"><i class="far fa-folder"></i> ${Event.tags.map(tag => `<span class="badge badge-primary">${tag}</span>`).join(' ')}</span>
         </div>
-        ${blog.content}
+        ${Event.content}
       </div>
     </div>
   `;
-  document.getElementById('recent-title').textContent = "Recent Blogs";
-  renderBlogList(blog.id);
+  document.getElementById('recent-title').textContent = "Recent Events";
+  renderEventList(Event.id);
 }
 
-// Render all blogs as grid (default view)
-function renderAllBlogs() {
-  document.getElementById('blog-content').innerHTML = '';
+// Render all Events as grid (default view)
+function renderAllEvents() {
+  document.getElementById('Event-content').innerHTML = '';
   document.getElementById('recent-title').textContent = "Latest stories";
-  const blogList = document.getElementById('blog-list');
-  blogList.innerHTML = '';
-  blogs.forEach(blog => {
-    blogList.innerHTML += `
+  const EventList = document.getElementById('Event-list');
+  EventList.innerHTML = '';
+  Events.forEach(Event => {
+    EventList.innerHTML += `
       <div class="col-md-4 mb-4">
-        <a href="#${blog.id}" style="text-decoration:none;color:inherit;">
+        <a href="#${Event.id}" style="text-decoration:none;color:inherit;">
           <div class="card border-0 shadow-sm h-100">
-            <img src="${blog.image}" class="card-img-top" alt="${blog.title}">
+            <img src="${Event.image}" class="card-img-top" alt="${Event.title}">
             <div class="card-body">
-              <h5 class="card-title mb-1">${blog.title}</h5>
-              <p class="card-text text-muted small">${blog.summary}</p>
+              <h5 class="card-title mb-1">${Event.title}</h5>
+              <p class="card-text text-muted small">${Event.summary}</p>
               <div>
-                <img src="${blog.authorImg}" alt="Author" style="width:24px;height:24px;border-radius:50%;margin-right:6px;">
-                <small class="text-muted">${blog.author} &middot; ${blog.date}</small>
+                <img src="${Event.authorImg}" alt="Author" style="width:24px;height:24px;border-radius:50%;margin-right:6px;">
+                <small class="text-muted">${Event.author} &middot; ${Event.date}</small>
               </div>
             </div>
           </div>
@@ -120,14 +120,14 @@ function renderAllBlogs() {
   });
 }
 
-// Handle hash change to show blog or all
+// Handle hash change to show Event or all
 function handleHash() {
   const id = location.hash.replace('#', '');
-  const blog = blogs.find(b => b.id === id);
-  if (blog) {
-    renderBlog(blog);
+  const Event = Events.find(b => b.id === id);
+  if (Event) {
+    renderEvent(Event);
   } else {
-    renderAllBlogs();
+    renderAllEvents();
   }
 }
 
