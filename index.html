@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
   <!-- Navigation Buttons --> 
@@ -68,6 +69,45 @@
         <p>We create fun and friendly get-togethers where everyone can meet, eat, and build lasting friendships.</p>
       </div>
     </div>
+  </section>
+  <section class="Chatbot">
+    <!-- Floating Chatbot Icon -->
+    <div id="chatbot-icon" title="Chat with us">
+      <span class="material-icons">smart_toy</span>
+    </div>
+
+    <!-- Chatbot Window (hidden by default) -->
+    <div id="chatbot-window">
+      <div class="chatbot-header">
+        <span>Chat with Ali</span>
+        <div>
+          <button id="close-btn" title="Close" aria-label="Close">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="chatbot-body">
+        <div id="chatWindow" class="chat-window">
+          <div class="msg ai">👋 Hello! My name is Ali, and I'm your Afghanistan Association virtual guide! <br> How can I help you today?</div>
+        </div>
+        <form id="chatForm" class="chat-form">
+          <label for="userInput" class="visually-hidden">Message</label>
+          <input
+            id="userInput"
+            name="userInput"
+            type="text"
+            placeholder="Ask me anything…"
+            autocomplete="off"
+            required
+          />
+          <button type="submit" id="sendBtn">
+            <span class="material-icons">send</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+
   </section>
 
   <!-- Footer -->
