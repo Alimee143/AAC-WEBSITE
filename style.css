@@ -32,9 +32,11 @@ body.scrolled .hero {
 
 /* Optional: Make sure the next section fills the viewport */
 section.container.text-center.py-5 {
-  min-height: 100vh;
+  min-height: 60vh;
   padding-top: 80px;
   background: #f8f9fa;
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
 .hero h1 {
@@ -44,6 +46,9 @@ section.container.text-center.py-5 {
   color: #06004a; /* Georgetown Blue */
   background-color: #ffffff67;
   border-radius: 10px;
+}
+.whatWeDo h4{
+  font-weight: bold;
 }
 .hero p {
   font-family: 'Montserrat', Arial, sans-serif;
