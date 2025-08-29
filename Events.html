@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events - AAC Georgetown University</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <button class="hamburger" id="menu-toggle" aria-label="Open navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-buttons">
+    <a href="index.html"><button>Home</button></a>
+    <a href="Events.html"><button>Events</button></a>
+    <a href="about.html"><button>About Us</button></a>
+  </div>
+  <Section class="events-section">
+    <div class="container py-5">
+      <div class="d-flex justify-content-center mb-4">
+        <button id="show-future" class="btn active">Future Events</button>
+        <button id="show-past" class="btn">Past Events</button>
+      </div>
+      <div id="future-events-section">
+        <div id="Event-content-future"></div>
+        <h4 class="mt-5 mb-3" id="recent-title-future">Upcoming Events</h4>
+        <div class="row" id="Event-list-future"></div>
+      </div>
+      <div id="past-events-section" style="display:none;">
+        <div id="Event-content-past"></div>
+        <h4 class="mt-5 mb-3" id="recent-title-past">Past Events</h4>
+        <div class="row" id="Event-list-past"></div>
+      </div>
+    </div>
+  </Section>
+  <footer class="footer mt-5">
+    <div class="container text-center">
+      <p>&copy; 2025 Afghanistan Association Club, Georgetown University. All rights reserved.</p>
+      <p>
+        <a href="mailto:aac786@georgetown.edu">aac786@georgetown.edu</a> |
+        <a href="https://www.instagram.com/georgetown_aac?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a>
+      </p>
+    </div>
+  </footer>
+  <script src="Events.js"></script>
+  <script src="main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const showFutureBtn = document.getElementById('show-future');
+      const showPastBtn = document.getElementById('show-past');
+      const futureSection = document.getElementById('future-events-section');
+      const pastSection = document.getElementById('past-events-section');
+
+      showFutureBtn.addEventListener('click', function() {
+        showFutureBtn.classList.add('active');
+        showPastBtn.classList.remove('active');
+        futureSection.style.display = '';
+        pastSection.style.display = 'none';
+      });
+
+      showPastBtn.addEventListener('click', function() {
+        showPastBtn.classList.add('active');
+        showFutureBtn.classList.remove('active');
+        pastSection.style.display = '';
+        futureSection.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

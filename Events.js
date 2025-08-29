@@ -45,17 +45,32 @@ const Events = [
   }
 ];
 
-// Render Event list
-function renderEventList(excludeId) {
-  const EventList = document.getElementById('Event-list');
+// Helper to parse event date (assumes format: "Month DD, YYYY")
+function parseEventDate(dateStr) {
+  return new Date(dateStr);
+}
+function isFutureEvent(event) {
+  const today = new Date();
+  const eventDate = parseEventDate(event.date);
+  // Consider events today as future
+  return eventDate >= new Date(today.getFullYear(), today.getMonth(), today.getDate());
+}
+function isPastEvent(event) {
+  return !isFutureEvent(event);
+}
+
+// Render Event list for a section (future or past)
+function renderEventListSection(section, excludeId) {
+  const EventList = document.getElementById(`Event-list-${section}`);
   EventList.innerHTML = '';
   Events
+    .filter(Event => (section === 'future' ? isFutureEvent(Event) : isPastEvent(Event)))
     .filter(Event => Event.id !== excludeId)
     .slice(0, 3)
     .forEach(Event => {
       EventList.innerHTML += `
         <div class="col-md-4 mb-4">
-          <a href="#${Event.id}" style="text-decoration:none;color:inherit;">
+          <a href="#${Event.id}-${section}" style="text-decoration:none;color:inherit;">
             <div class="card border-0 shadow-sm h-100">
               <img src="${Event.image}" class="card-img-top" alt="${Event.title}">
               <div class="card-body">
@@ -73,9 +88,9 @@ function renderEventList(excludeId) {
     });
 }
 
-// Render single Event
-function renderEvent(Event) {
-  const EventContent = document.getElementById('Event-content');
+// Render single Event for a section
+function renderEventSection(Event, section) {
+  const EventContent = document.getElementById(`Event-content-${section}`);
   EventContent.innerHTML = `
     <div class="card border-0 shadow-sm mb-4">
       <img src="${Event.image}" class="card-img-top img-fluid rounded-0" alt="${Event.title}">
@@ -89,49 +104,88 @@ function renderEvent(Event) {
       </div>
     </div>
   `;
-  document.getElementById('recent-title').textContent = "Recent Events";
-  renderEventList(Event.id);
+  document.getElementById(`recent-title-${section}`).textContent = section === 'future' ? "Upcoming Events" : "Past Events";
+  renderEventListSection(section, Event.id);
 }
 
-// Render all Events as grid (default view)
-function renderAllEvents() {
-  document.getElementById('Event-content').innerHTML = '';
-  document.getElementById('recent-title').textContent = "Latest stories";
-  const EventList = document.getElementById('Event-list');
+// Render all Events as grid for a section (default view)
+function renderAllEventsSection(section) {
+  document.getElementById(`Event-content-${section}`).innerHTML = '';
+  document.getElementById(`recent-title-${section}`).textContent = section === 'future' ? "Upcoming Events" : "Past Events";
+  const EventList = document.getElementById(`Event-list-${section}`);
   EventList.innerHTML = '';
-  Events.forEach(Event => {
-    EventList.innerHTML += `
-      <div class="col-md-4 mb-4">
-        <a href="#${Event.id}" style="text-decoration:none;color:inherit;">
-          <div class="card border-0 shadow-sm h-100">
-            <img src="${Event.image}" class="card-img-top" alt="${Event.title}">
-            <div class="card-body">
-              <h5 class="card-title mb-1">${Event.title}</h5>
-              <p class="card-text text-muted small">${Event.summary}</p>
-              <div>
-                <img src="${Event.authorImg}" alt="Author" style="width:24px;height:24px;border-radius:50%;margin-right:6px;">
-                <small class="text-muted">${Event.author} &middot; ${Event.date}</small>
+  Events
+    .filter(Event => (section === 'future' ? isFutureEvent(Event) : isPastEvent(Event)))
+    .forEach(Event => {
+      EventList.innerHTML += `
+        <div class="col-md-4 mb-4">
+          <a href="#${Event.id}-${section}" style="text-decoration:none;color:inherit;">
+            <div class="card border-0 shadow-sm h-100">
+              <img src="${Event.image}" class="card-img-top" alt="${Event.title}">
+              <div class="card-body">
+                <h5 class="card-title mb-1">${Event.title}</h5>
+                <p class="card-text text-muted small">${Event.summary}</p>
+                <div>
+                  <img src="${Event.authorImg}" alt="Author" style="width:24px;height:24px;border-radius:50%;margin-right:6px;">
+                  <small class="text-muted">${Event.author} &middot; ${Event.date}</small>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
-    `;
-  });
+          </a>
+        </div>
+      `;
+    });
 }
 
-// Handle hash change to show Event or all
+// Handle hash change to show Event or all for correct section
 function handleHash() {
-  const id = location.hash.replace('#', '');
-  const Event = Events.find(b => b.id === id);
-  if (Event) {
-    renderEvent(Event);
-  } else {
-    renderAllEvents();
+  const hash = location.hash.replace('#', '');
+  let section = 'future';
+  let id = '';
+  if (hash.endsWith('-past')) {
+    section = 'past';
+    id = hash.replace('-past', '');
+  } else if (hash.endsWith('-future')) {
+    section = 'future';
+    id = hash.replace('-future', '');
   }
+  // Hide/show sections
+  document.getElementById('future-events-section').style.display = section === 'future' ? '' : 'none';
+  document.getElementById('past-events-section').style.display = section === 'past' ? '' : 'none';
+  // Toggle button states
+  document.getElementById('show-future').classList.toggle('active', section === 'future');
+  document.getElementById('show-future').classList.toggle('btn-primary', section === 'future');
+  document.getElementById('show-future').classList.toggle('btn-outline-primary', section !== 'future');
+  document.getElementById('show-past').classList.toggle('active', section === 'past');
+  document.getElementById('show-past').classList.toggle('btn-primary', section === 'past');
+  document.getElementById('show-past').classList.toggle('btn-outline-primary', section !== 'past');
+
+  if (id) {
+    const Event = Events.find(b => b.id === id && (section === 'future' ? isFutureEvent(b) : isPastEvent(b)));
+    if (Event) {
+      renderEventSection(Event, section);
+      return;
+    }
+  }
+  renderAllEventsSection(section);
 }
 
 // Initial render
 window.addEventListener('DOMContentLoaded', handleHash);
 window.addEventListener('hashchange', handleHash);
-// Hamburger menu toggle
+
+// Add click handlers for toggle buttons
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('show-future').addEventListener('click', function() {
+    location.hash = '';
+    document.getElementById('future-events-section').style.display = '';
+    document.getElementById('past-events-section').style.display = 'none';
+    renderAllEventsSection('future');
+  });
+  document.getElementById('show-past').addEventListener('click', function() {
+    location.hash = '';
+    document.getElementById('future-events-section').style.display = 'none';
+    document.getElementById('past-events-section').style.display = '';
+    renderAllEventsSection('past');
+  });
+});

@@ -323,7 +323,20 @@ section, .container, .py-5 {
   border: 0;
 }
 
-
+.events-section .btn {
+  background-color: transparent;
+  border: none;
+  color: #10294d;
+  margin: 20px;
+}
+.events-section .btn:hover {
+  color: #ffffff;
+  background-color: #10294d;
+}
+.events-section .active {
+  color: #ffffff;
+  background-color: #10294d;
+}
 /* Responsive Hero Image */
 @media (max-width: 768px) {
   .hero {
