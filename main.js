@@ -188,15 +188,15 @@ window.addEventListener('DOMContentLoaded', () => {
   animate();
 });
 
-// Hamburger menu toggle
-document.addEventListener('DOMContentLoaded', function() {
+// Hamburger menu toggle (robust for all pages)
+window.addEventListener('DOMContentLoaded', function() {
   const menuToggle = document.getElementById('menu-toggle');
   const navButtons = document.querySelector('.nav-buttons');
   if (menuToggle && navButtons) {
-    menuToggle.addEventListener('click', function() {
+    menuToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
       navButtons.classList.toggle('active');
     });
-    // Optional: close menu when clicking outside
     document.addEventListener('click', function(e) {
       if (!menuToggle.contains(e.target) && !navButtons.contains(e.target)) {
         navButtons.classList.remove('active');
@@ -221,4 +221,24 @@ document.getElementById('chatbot-icon').onclick = function() {
 document.getElementById('close-btn').onclick = function() {
   document.getElementById('chatbot-window').classList.remove('active');
 };
+// Event listeners for future/past events
+document.addEventListener('DOMContentLoaded', function() {
+      const showFutureBtn = document.getElementById('show-future');
+      const showPastBtn = document.getElementById('show-past');
+      const futureSection = document.getElementById('future-events-section');
+      const pastSection = document.getElementById('past-events-section');
 
+      showFutureBtn.addEventListener('click', function() {
+        showFutureBtn.classList.add('active');
+        showPastBtn.classList.remove('active');
+        futureSection.style.display = '';
+        pastSection.style.display = 'none';
+      });
+
+      showPastBtn.addEventListener('click', function() {
+        showPastBtn.classList.add('active');
+        showFutureBtn.classList.remove('active');
+        pastSection.style.display = '';
+        futureSection.style.display = 'none';
+      });
+    });

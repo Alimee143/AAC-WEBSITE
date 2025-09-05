@@ -48,27 +48,5 @@
   </footer>
   <script src="Events.js"></script>
   <script src="main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const showFutureBtn = document.getElementById('show-future');
-      const showPastBtn = document.getElementById('show-past');
-      const futureSection = document.getElementById('future-events-section');
-      const pastSection = document.getElementById('past-events-section');
-
-      showFutureBtn.addEventListener('click', function() {
-        showFutureBtn.classList.add('active');
-        showPastBtn.classList.remove('active');
-        futureSection.style.display = '';
-        pastSection.style.display = 'none';
-      });
-
-      showPastBtn.addEventListener('click', function() {
-        showPastBtn.classList.add('active');
-        showFutureBtn.classList.remove('active');
-        pastSection.style.display = '';
-        futureSection.style.display = 'none';
-      });
-    });
-  </script>
 </body>
 </html>

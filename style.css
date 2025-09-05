@@ -382,6 +382,28 @@ section, .container, .py-5 {
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
+    z-index: 2001; /* Ensure hamburger is above nav-buttons */
+  }
+  .nav-buttons {
+    display: none;
+  }
+  .nav-buttons.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    right: 10px;
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(4,30,66,0.12);
+    border-radius: 8px;
+    padding: 10px 0;
+    z-index: 2000; /* Make sure nav is above content but below hamburger */
+    width: 160px;
+  }
+}
+  @media (max-width: 390px) {
+  .hamburger {
+    display: flex;
   }
   .nav-buttons {
     display: none;
@@ -421,4 +443,3 @@ body:not(.home-page) .container-fluid > :first-child,
 body:not(.home-page) section.container > :first-child {
   margin-top: 0;
 }
-
